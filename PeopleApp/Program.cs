@@ -42,6 +42,12 @@ namespace PeopleApp
 
             WriteLine($"{alice.Name} was born on {alice.DateOfBirth}");
 
+            var blankPerson = new Person();
+            WriteLine($"{blankPerson.Name} of {blankPerson.HomePlanet} was created at {blankPerson.Instantiated:hh:mm:ss} on a {blankPerson.Instantiated:dddd}");
+            var gunny = new Person("Gunny", "Mars");
+            WriteLine($"{gunny.Name} of {gunny.HomePlanet} was created at {gunny.Instantiated:hh:mm:ss} on a {gunny.Instantiated:dddd}");
+
+
             BankAccount.InterestRate = 0.012M; //instance member
 
             var jonesAccount = new BankAccount();

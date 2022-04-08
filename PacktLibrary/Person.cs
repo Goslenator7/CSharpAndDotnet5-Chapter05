@@ -10,12 +10,25 @@ namespace Packt.Shared
 
         //read-only fields
         public readonly string HomePlanet = "Earth";
+        public readonly DateTime Instantiated;
 
         public string Name;
         public DateTime DateOfBirth;
         public WondersOfTheAncientWorld FavoriteAncientWonder;
         public List<Person> Children = new List<Person>();
 
+        //constructors
+        public Person()
+        {
+            Name = "Unknown";
+            Instantiated = DateTime.Now;
+        }
 
+        public Person(string initialName, string homePlanet)
+        {
+            Name = initialName;
+            HomePlanet = homePlanet;
+            Instantiated = DateTime.Now;
+        }
     }
 }
