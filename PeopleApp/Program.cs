@@ -15,7 +15,10 @@ namespace PeopleApp
             bob.Children.Add(new Person {Name = "Alfred" });
             bob.Children.Add(new Person {Name = "Zoe" });
 
-
+            bob.WriteToConsole();
+            WriteLine();
+            WriteLine(bob.GetOrigin());
+            WriteLine();
             WriteLine($"{bob.Name} is a {Person.Species} from planet {bob.HomePlanet} and has {bob.Children.Count} children: ");
 
             //for (int child = 0; child < bob.Children.Count; child++)
@@ -33,7 +36,7 @@ namespace PeopleApp
                 //arg0 : bob.Name,
                 //arg1 : bob.FavoriteAncientWonder,
                 //arg2 : (int)bob.FavoriteAncientWonder);
-
+            WriteLine();
             var alice = new Person
             {
                 Name = "Alice Jones",
@@ -42,12 +45,13 @@ namespace PeopleApp
 
             WriteLine($"{alice.Name} was born on {alice.DateOfBirth}");
 
+            WriteLine();
             var blankPerson = new Person();
             WriteLine($"{blankPerson.Name} of {blankPerson.HomePlanet} was created at {blankPerson.Instantiated:hh:mm:ss} on a {blankPerson.Instantiated:dddd}");
             var gunny = new Person("Gunny", "Mars");
             WriteLine($"{gunny.Name} of {gunny.HomePlanet} was created at {gunny.Instantiated:hh:mm:ss} on a {gunny.Instantiated:dddd}");
 
-
+            WriteLine();
             BankAccount.InterestRate = 0.012M; //instance member
 
             var jonesAccount = new BankAccount();
@@ -62,6 +66,14 @@ namespace PeopleApp
 
             WriteLine($"{gerrierAccount.AccountName} earned {gerrierAccount.Balance * BankAccount.InterestRate:C} interest");
 
+            WriteLine();
+            (string, int) fruit = bob.GetFruit();
+            // Tuple fields are by default named Item1, Item2 etc.
+            WriteLine($"There are {fruit.Item1}, {fruit.Item2} there are.");
+            //WriteLine($"There are {fruitNamed.Number} {fruitNamed.Name}.");
+             WriteLine();
+            var fruitNamed = bob.GetNamedFruit();
+            WriteLine($"There are {fruitNamed.Number} {fruitNamed.Name}.");
         }
     }
 }
