@@ -52,5 +52,16 @@ namespace Packt.Shared
         {
             return (Name: "Apples", Number: 3);
         }
+
+        //Different parameter types
+        public void PassingParameters(int x, ref int y, out int z)
+        {
+            //out params cannot have a default and MUST be initialised in the method
+            z = 99;
+            //increment
+            x++;
+            y++;
+            z++;
+        }
     }
 }

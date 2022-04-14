@@ -74,6 +74,31 @@ namespace PeopleApp
              WriteLine();
             var fruitNamed = bob.GetNamedFruit();
             WriteLine($"There are {fruitNamed.Number} {fruitNamed.Name}.");
+
+            //Deconstruct tuple
+            (string fruitName, int fruitNumber) = bob.GetFruit();
+            WriteLine($"Deconstructed: {fruitName}, {fruitNumber}");
+
+            int a = 10;
+            int b = 20;
+            int c = 30;
+
+            WriteLine($"Before: a = {a}, b = {b}, c = {c}");
+            bob.PassingParameters(a, ref b, out c); 
+            // a is passed default as a value i.e. a copy of the variable so keeps the original value of 10
+            // b is passed as a reference, y(in the method) is a reference to b, so b is incremented when y is incremented
+            // z (in the method) is a reference to c, but c is always replaced by whatever code is returned from the executed method
+            WriteLine($"After: a = {a}, b = {b}, c = {c}"); // a = 10, b = 21, c = 100
+
+            int d = 10;
+            int e = 20;
+
+            WriteLine($"Before: d = {d}, e = {e}, f doesn't exist yet!");
+
+            //C# 7.0 syntax for out parameter
+            bob.PassingParameters(d, ref e, out int f);
+            WriteLine($"After: d = {d}, e = {e}, f = {f}");  //d = 10, e = 21, f = 100
+            // f is not initialized in main, but is returned as an out from the called method
         }
     }
 }
