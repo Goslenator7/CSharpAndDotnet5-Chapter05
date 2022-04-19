@@ -115,6 +115,56 @@ namespace PeopleApp
             WriteLine($"Sam's favorite ice cream flavor is: {sam.FavoriteIceCream}.");
             sam.FavoritePrimaryColor = "Red";
             WriteLine($"Sam's favorite primary color is: {sam.FavoritePrimaryColor}.");
+
+            WriteLine();
+            WriteLine();
+            WriteLine("Flight class pattern matching");
+
+            object[] passengers =
+            {
+                new FirstClassPassenger { AirMiles = 1_149 },
+                new FirstClassPassenger { AirMiles = 16_562 },
+                new BusinessClassPassenger(),
+                new CoachClassPassenger { CarryOnKG = 25.7 },
+                new CoachClassPassenger { CarryOnKG = 0 },
+            };
+
+            foreach (object passenger in passengers)
+            {
+                decimal flightCost = passenger switch
+                {
+                    /* C# 8 pattern matching syntax
+                    // To pattern match on properties of an object, you must name
+                    // a local variable that can be used in an expression e.g. p
+                    FirstClassPassenger p when p.AirMiles > 35000   => 1500M,
+                    FirstClassPassenger p when p.AirMiles > 15000   => 1750M,
+                    // To pattern match on a type only, you can use _ to discard the local variable
+                    FirstClassPassenger _                           => 2000M,
+                    BusinessClassPassenger _                        => 1000M,
+                    CoachClassPassenger p when p.CarryOnKG < 10.0   => 500M,
+                    CoachClassPassenger _                           => 650M,
+                    // The switch statement also uses _ to represent the default condition
+                    _                                               => 800M*/
+
+                    //C# 9 syntax
+                    FirstClassPassenger p => p.AirMiles switch
+                    {
+                        > 35000 => 1500M,
+                        > 15000 => 1750M,
+                        _       => 2000M
+                    },
+
+                    CoachClassPassenger p when p.CarryOnKG < 10.0 => 500M,
+                    CoachClassPassenger                           => 650M,
+                    _                                             => 800M
+                };
+
+                WriteLine($"Flight costs {flightCost:C} for {passenger}");
+
+                WriteLine();
+            WriteLine();
+            WriteLine("Init-only properties");
+            }
         }
     }
 }
